@@ -1,0 +1,26 @@
+version: 2
+
+models:
+
+  - name: dim_client
+    description: "Staging table for client dimension"
+    columns:
+      - name: sev_client_id
+        description: "conversation part ID"
+        tests:
+          - not_null
+      - name: signed_up_at_utc  
+        description: "Timestamp when conversation part was created"
+        tests:
+          - not null
+      - name: registration_finished_at_utc 
+        tests:
+          - not null
+      - name: has_active_contract_current 
+        tests:
+          - not null
+      - name: _valid_from_utc 
+        tests:
+          - not null
+     
+          
