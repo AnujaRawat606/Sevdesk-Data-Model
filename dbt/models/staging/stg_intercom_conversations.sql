@@ -11,4 +11,4 @@ select
   coalesce(was_conversation_outside_office_hours, FALSE) as was_conversation_outside_office_hours,
   first_closed_at_utc,
   last_closed_at_utc
-from {{ ref('conversations') }}
+from {{ ref('conversation') }}
