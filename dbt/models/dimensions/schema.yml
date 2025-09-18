@@ -2,15 +2,13 @@ version: 2
 
 models:
 
-  - name: dim_client
-    description: "Staging table for client dimension"
+  - name: dim_clients
+    description: "Dimension table for clients"
     columns:
       - name: sev_client_id
-        description: "conversation part ID"
         tests:
           - not_null
       - name: signed_up_at_utc  
-        description: "Timestamp when conversation part was created"
         tests:
           - not null
       - name: registration_finished_at_utc 
@@ -22,5 +20,12 @@ models:
       - name: _valid_from_utc 
         tests:
           - not null
-     
+
+
+  - name: dim_dates
+    description: "Dimension table for dates"
+    columns:
+      - name: date_day
+        tests:
+          - not_null
           
