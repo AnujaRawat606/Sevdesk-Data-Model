@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: stg_intercom_conversation
+    description: "Staging table for intercom conversations"
+    columns:
+      - name: conversation_id
+        description: "conversation part ID"
+        tests:
+          - not_null
+      - name: author_contact_id  
+        tests:
+          - not null
+      - name: sev_client_id 
+        tests:
+          - relationships:
+              to: ref('dim_client')
+              field: conversation_id
+      - name: created_at_utc 
+        tests:
+          - not null
+      - name: updated_at_utc 
+        tests:
+          - not null
+      - name: first_closed_at_utc 
+        tests:
+          - not null
+      - name: last_closed_at_utc 
+        tests:
+          - not null
+
+
+  - name: stg_intercom_conversation_parts
+    description: "Staging table for intercom conversation parts"
+    columns:
+      - name: conversation_part_id
+        description: "conversation part ID"
+        tests:
+          - not_null
+      - name: conversation_id  
+        description: "Timestamp when conversation part was created"
+        tests:
+          - relationships:
+              to: ref('stg_intercom_conversations')
+              field: conversation_id
+      - name: created_at_utc 
+        tests:
+          - not null
+      - name: updated_at_utc 
+        tests:
+          - not null
+      - name: part_type 
+        tests:
+          - not null
+      - name: is_first_agent_reply 
+        tests:
+          - not null
+
+  - name: dim_client
+    description: "Staging table for client dimension"
+    columns:
+      - name: sev_client_id
+        description: "conversation part ID"
+        tests:
+          - not_null
+      - name: signed_up_at_utc  
+        description: "Timestamp when conversation part was created"
+        tests:
+          - not null
+      - name: registration_finished_at_utc 
+        tests:
+          - not null
+      - name: has_active_contract_current 
+        tests:
+          - not null
+      - name: _valid_from_utc 
+        tests:
+          - not null
+     
+          
